@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <script>
+        // Creating instances
+        const emp1 = new Employee("Alice", 30, "Engineer");
+        const emp2 = new Employee("Bob", 25, "Designer");
+
+        console.log(emp1.show());
+        console.log(Employee.employeeCount); // 2
+
+        Employee.displayHTRRules(); // Prints HR rules
+
+        const student1 = new Student("Charlie", 20, "Computer Science");
+        console.log(student1.show());
+
+        // //overloading
+        // console.log(calculateArea(5)); // 25
+        // console.log(calculateArea(5, 10)); // 50
+
+        // var s = new Shape(); // Error (abstract class)
+
+        // try{
+        // class GraduateStudent extends Student{}
+        // }catch(e){
+        //     console.error(e.message); 
+        // }
+
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

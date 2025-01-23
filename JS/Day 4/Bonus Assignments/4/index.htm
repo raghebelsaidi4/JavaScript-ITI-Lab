@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skills</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .skills-container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .skill-item span {
+            margin-right: 10px;
+        }
+
+        .remove-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+
+        .remove-btn:hover {
+            color: #d40f0f;
+        }
+
+        .info {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .save-btn {
+            background: #4caf50;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="skills-container">
+        <h2>My Skills</h2>
+        <div class="skills-list" id="skillsList">
+            <!-- Skills will be added dynamically here -->
+        </div>
+        <p class="info">Add up to 10 skills. Remove skills by clicking the delete (X) button.</p>
+        <div class="actions">
+            <button class="save-btn">Save</button>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
