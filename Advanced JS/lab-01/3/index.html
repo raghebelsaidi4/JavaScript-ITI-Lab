@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const num1 = parseFloat(prompt('Enter first number: '));
+    const num2 = parseFloat(prompt('Enter second number: '));
+
+    // Dynamic function
+
+    let calculate;
+
+    // sum two numbers
+    calculate = function (a, b) {
+        alert("Sum: " + (a + b));
+    }
+    calculate(num1, num2);
+
+    // subtract two numbers
+    calculate = function (a, b) {
+        alert("Subtract: " + (a - b));
+    }
+    calculate(num1, num2);
+
+    // multiply two numbers
+    calculate = function (a, b) {
+        alert("Multiply: " + (a * b));
+    }
+    calculate(num1, num2);
+
+    // divide two numbers
+    calculate = function (a, b) {
+        if (b === 0) {
+            alert("Cannot divide by zero");
+
+        } else {
+            alert("Divide: " + (a / b));
+        }
+    }
+    calculate(num1, num2);
+</script>
+</body>
+</html>
+
+<!--Why is a Dynamic Function Best for This Case?-->
+<!--Easy to change functionality by reassigning the variable.-->
+<!--handle multiple operations without needing separate function declarations for each.-->
+<!--reduce the memory footprint.-->

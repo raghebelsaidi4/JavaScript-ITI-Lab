@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<!--Literal Function-->
+<!--<img src="test.jpg" onerror="(function () {console.log('An error occurred while loading the image.');}) ()"
+     alt="test image">-->
+
+<!--Declarative Function (best suited for handling events) -->
+<img src="test.jpg" onerror="handleError()" alt="test image">
+
+<script>
+    function handleError() {
+        alert('Error loading image');
+    }
+
+
+</script>
+</body>
+</html>
+
+<!--Differences Between Declarative and Literal Functions-->
+<!--Declarative -> hoisted, can be called before the function is defined // Can be reused throughout the script by name-->
+<!--Literal -> not hoisted, cannot be called before the function is defined (only available after its definition.) // Cannot be reused unless assigned to a variable.-->
+
+
