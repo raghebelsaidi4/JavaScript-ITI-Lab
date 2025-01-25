@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Grades</title>
+</head>
+<body>
+<h1>Student Grades</h1>
+<label for="studentSelect">Select a Student</label>
+<select name="studentSelect" id="studentSelect">
+    <option value="">Select a Student</option>
+</select>
+<h2>Grades:</h2>
+<div id="gradesOutput"></div>
+
+<script>
+    const studentData = new Map([
+        [
+            "Amr",
+            {
+                Grades: [
+                    {CourseName: "JavaScript", Grade: "Excellent"},
+                    {CourseName: "Jquery", Grade: "Good"},
+                    {CourseName: "CSS", Grade: "V.Good"}
+                ]
+            }
+        ],
+        [
+            "Omar",
+            {
+                Grades: [
+                    {CourseName: "HTML", Grade: "Good"},
+                    {CourseName: "CSS", Grade: "Excellent"},
+                    {CourseName: "React", Grade: "V.Good"}
+                ]
+            }
+        ],
+        [
+            "Ahmed",
+            {
+                Grades: [
+                    {CourseName: "Node.js", Grade: "Excellent"},
+                    {CourseName: "MongoDB", Grade: "Good"},
+                    {CourseName: "Express", Grade: "V.Good"}
+                ]
+            }
+        ]
+    ]);
+
+
+    // Populate the dropdown list with student names
+    const studentSelect = document.getElementById("studentSelect");
+    studentData.forEach((value, key) => {
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = key;
+        studentSelect.appendChild(option);
+    });
+
+    // Handle student selection and display grades
+    studentSelect.addEventListener("change", (event) => {
+        const selectedStudent = event.target.value;
+        const gradesOutput = document.getElementById("gradesOutput");
+        gradesOutput.innerHTML = ""; // Clear previous output
+
+        if (selectedStudent) {
+            const studentGrades = studentData.get(selectedStudent).Grades;
+
+            // Create a table to display grades
+            const table = document.createElement("table");
+            table.style.borderCollapse = "collapse";
+            table.style.marginTop = "10px";
+            table.style.width = "100%";
+
+            // Add table header
+            const headerRow = table.insertRow();
+            headerRow.innerHTML = `
+          <th style="border: 1px solid #ccc; padding: 8px;">Course Name</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Grade</th>
+        `;
+
+            // Add rows for each course and grade
+            studentGrades.forEach((course) => {
+                const row = table.insertRow();
+                row.innerHTML = `
+            <td style="border: 1px solid #ccc; padding: 8px;">${course.CourseName}</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">${course.Grade}</td>
+          `;
+            });
+
+            gradesOutput.appendChild(table);
+        }
+    });
+
+    // Initial display of all students and their grades
+    console.log("All students and their grades:");
+    studentData.forEach((value, key) => {
+        console.log(`${key}:`);
+        value.Grades.forEach((course) => {
+            console.log(`  ${course.CourseName}: ${course.Grade}`);
+        });
+    });
+</script>
+</body>
+</html>

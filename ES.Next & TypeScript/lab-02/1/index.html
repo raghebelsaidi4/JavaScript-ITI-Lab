@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch User</title>
+</head>
+<body>
+<h1>Fetch User</h1>
+<label for="userSelect">Select a User : </label>
+<select id="userSelect">
+    <option value="">Select a User</option>
+</select>
+<button id="showButton" disabled>Show Image</button>
+
+<div id="userDetails">
+    <h2>User Details</h2>
+    <p id="userName"></p>
+    <img src="" id="userImage" alt="User Avatar">
+
+    <script>
+        // Function to fetch and populate users
+        async function fetchUsers() {
+            const url = "https://jsonplaceholder.typicode.com/users"; // Replace with your API endpoint
+            const selectElement = document.getElementById("userSelect");
+            const showButton = document.getElementById("showButton");
+
+            try {
+                const response = await fetch(url); // Make an AJAX call
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const users = await response.json(); // Parse JSON response
+
+                // Populate the dropdown list with users
+                users.forEach((user) => {
+                    const option = document.createElement("option");
+                    option.value = user.id; // Use the user ID as the value
+                    option.textContent = user.name; // Display the user's name
+                    selectElement.appendChild(option);
+                });
+
+                // Enable the button after data is loaded
+                showButton.disabled = false;
+                console.log("Users fetched and dropdown populated.");
+            } catch (error) {
+                console.error("Error fetching users:", error.message);
+            }
+        }
+
+        // Event listener for button click
+        document.getElementById("showButton").addEventListener("click", async () => {
+            const selectElement = document.getElementById("userSelect");
+            const selectedUserId = selectElement.value;
+            const userDetailsDiv = document.getElementById("userDetails");
+            const userNameElement = document.getElementById("userName");
+            const userImageElement = document.getElementById("userImage");
+
+            if (!selectedUserId) {
+                alert("Please select a user first!");
+                return;
+            }
+
+            try {
+                // Fetch user details (assuming a different endpoint for user details)
+                const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${selectedUserId}`);
+                if (!userResponse.ok) {
+                    throw new Error(`HTTP error! Status: ${userResponse.status}`);
+                }
+
+                const user = await userResponse.json();
+
+                // Update user details in the UI
+                userNameElement.textContent = `Name: ${user.name}`;
+                userImageElement.src = `https://robohash.org/${user.id}?set=set2`; // Generate an avatar (RoboHash API for demonstration)
+                userImageElement.alt = user.name;
+
+                userDetailsDiv.style.display = "block"; // Show the details div
+            } catch (error) {
+                console.error("Error fetching user details:", error.message);
+            }
+        });
+
+        // Fetch and populate users when the page loads
+        fetchUsers();
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proxy Demo</title>
+</head>
+<body>
+<h1>Proxy Demo</h1>
+<pre id="output"></pre>
+
+<script>
+    // Create object
+    const user = {
+        name: "Alice",
+        age: 25,
+    };
+
+    // Create a Proxy to intercept operations on the 'user' object
+    const userProxy = new Proxy(user, {
+        // Intercept property access
+        get(target, prop) {
+            if (prop in target) {
+                return `Property "${prop}" accessed, value: ${target[prop]}`;
+            } else {
+                return `Property "${prop}" does not exist`;
+            }
+        },
+
+        // Intercept property setting
+        set(target, prop, value) {
+            if (prop === "age" && typeof value !== "number") {
+                console.warn(`Invalid value for "age": ${value}`);
+                return false; // Prevent assignment
+            }
+            target[prop] = value;
+            console.log(`Property "${prop}" set to value: ${value}`);
+            return true; // Allow assignment
+        },
+
+        // Intercept property deletion
+        deleteProperty(target, prop) {
+            if (prop in target) {
+                console.log(`Property "${prop}" deleted`);
+                delete target[prop];
+                return true; // Allow deletion
+            } else {
+                console.warn(`Property "${prop}" does not exist`);
+                return false; // Prevent deletion
+            }
+        }
+    });
+
+    // Demonstrate Proxy functionality
+    const output = document.getElementById("output");
+    let log = "";
+
+    // Access existing and non-existing properties
+    log += `${userProxy.name}\n`;
+    log += `${userProxy.age}\n`;
+    log += `${userProxy.email}\n`;
+
+    // Modify properties
+    userProxy.age = 30; // Valid
+    userProxy.age = "thirty"; // Invalid
+    userProxy.email = "alice@example.com"; // Adding a new property
+
+    // Delete properties
+    delete userProxy.age; // Existing property
+    delete userProxy.address; // Non-existing property
+
+    // Log final state of the object
+    log += `\nFinal object state:\n${JSON.stringify(user, null, 2)}`;
+    output.textContent = log;
+</script>
+</body>
+</html>

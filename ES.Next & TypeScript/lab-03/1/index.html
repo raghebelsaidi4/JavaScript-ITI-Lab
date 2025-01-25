@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeScript Shapes</title>
+</head>
+<body>
+<h1>TypeScript Shapes Demo</h1>
+<p id="output"></p>
+
+<script src="shapes.js"></script>
+<script>
+    // Access the Rectangle and Square classes defined in the compiled JS file
+    const output = document.getElementById("output");
+
+    // Create objects
+    const rectangle = new Rectangle(12, 8);
+    const square = new Square(6);
+
+    // Display rectangle data
+    output.innerHTML += `<p>Rectangle Circumference: ${rectangle.calcCircumference()}</p>`;
+    output.innerHTML += `<p>Square Circumference: ${square.calcCircumference()}</p>`;
+
+    // Call static methods
+    console.log(Rectangle.whoAmI());
+    console.log(Square.whoAmI());
+</script>
+</body>
+</html>
