@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key and Mouse Button Detection</title>
+</head>
+<body>
+<h1>Key and Mouse Button Detection</h1>
+<p>Press any key inside the textbox or click with any mouse button:</p>
+<label for="textbox"></label><input type="text" id="textbox" placeholder="Type here...">
+
+<script>
+    // Get the textbox element
+    const textbox = document.getElementById('textbox');
+
+    // Add event listener for keydown event
+    textbox.addEventListener('keydown', function (event) {
+        alert(`Key pressed: ${event.key} (Key Code: ${event.keyCode})`);
+    });
+
+    // Add event listener for mouse click event
+    textbox.addEventListener('mousedown', function (event) {
+        let button;
+        switch (event.button) {
+            case 0:
+                button = "Left button";
+                break;
+            case 1:
+                button = "Middle button";
+                break;
+            case 2:
+                button = "Right button";
+                break;
+            default:
+                button = "Unknown button";
+        }
+        alert(`Mouse button clicked: ${button}`);
+    });
+</script>
+</body>
+</html>

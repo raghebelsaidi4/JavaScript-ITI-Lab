@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Click Counter</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Click the Images to Increase the Counter</h1>
+<div>
+    <img src="https://via.placeholder.com/100" alt="Image 1" id="image1">
+    <img src="https://via.placeholder.com/100" alt="Image 2" id="image2">
+    <img src="https://via.placeholder.com/100" alt="Image 3" id="image3">
+</div>
+<p>Counter: <span id="counter">0</span></p>
+
+<script>
+    // Initialize counter
+    let counter = 0;
+    const counterDisplay = document.getElementById('counter');
+
+    // Function to increase counter
+    function increaseCounter() {
+        counter++;
+        counterDisplay.textContent = counter;
+    }
+
+    // Function to alert the score
+    function alertScore() {
+        alert(`Your score is: ${counter}`);
+    }
+
+    // Function to show "Game Over" alert
+    function gameOver() {
+        alert('Game Over');
+    }
+
+    // Get all images
+    const images = document.querySelectorAll('img');
+
+    // Add event listeners to images
+    images.forEach(image => {
+        image.addEventListener('click', increaseCounter); // Increase counter on click
+        image.addEventListener('click', alertScore); // Alert score on click
+    });
+
+    // After 3 seconds, remove the alertScore handler and add the gameOver handler
+    setTimeout(() => {
+        images.forEach(image => {
+            image.removeEventListener('click', alertScore); // Remove alertScore handler
+            image.addEventListener('click', gameOver); // Add gameOver handler
+        });
+    }, 3000);
+</script>
+</body>
+</html>

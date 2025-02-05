@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock and Key/Mouse Detection</title>
+    <style>
+        #clock {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Clock and Key/Mouse Detection</h1>
+<p>Press any key inside the textbox or click with any mouse button:</p>
+<input type="text" id="textbox" placeholder="Type here...">
+
+<div>
+    <button id="startClock">Start Clock</button>
+</div>
+<div id="clock"></div>
+
+<script>
+    // Get the textbox element
+    const textbox = document.getElementById('textbox');
+
+    // Add event listener for keydown event
+    textbox.addEventListener('keydown', function (event) {
+        alert(`Key pressed: ${event.key} (Key Code: ${event.keyCode})`);
+    });
+
+    // Add event listener for mouse click event
+    textbox.addEventListener('mousedown', function (event) {
+        let button;
+        switch (event.button) {
+            case 0:
+                button = "Left button";
+                break;
+            case 1:
+                button = "Middle button";
+                break;
+            case 2:
+                button = "Right button";
+                break;
+            default:
+                button = "Unknown button";
+        }
+        alert(`Mouse button clicked: ${button}`);
+    });
+
+    // Clock functionality
+    const startClockButton = document.getElementById('startClock');
+    const clockDisplay = document.getElementById('clock');
+    let clockInterval;
+
+    // Function to update the clock
+    function updateClock() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString(); // Get time in local format
+        clockDisplay.textContent = timeString;
+    }
+
+    // Start clock on button click
+    startClockButton.addEventListener('click', function () {
+        alert('Clock Started');
+        updateClock(); // Update immediately
+        clockInterval = setInterval(updateClock, 1000); // Update every second
+    });
+
+    // Stop clock on Alt + W key press
+    document.addEventListener('keydown', function (event) {
+        if (event.altKey && event.key === 'w') {
+            clearInterval(clockInterval); // Stop the clock
+            alert('Clock stopped');
+            clockDisplay.textContent = ''; // Clear the clock display
+        }
+    });
+</script>
+</body>
+</html>

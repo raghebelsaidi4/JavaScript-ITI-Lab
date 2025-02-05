@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Window Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    a {
+      display: block;
+      margin: 10px 0;
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h1>Popup Window Example</h1>
+<p>Click the links below to open and close the advertising window.</p>
+
+<!-- Link to open the advertising window -->
+<a href="#" id="openAdLink">Open Advertising Window (after 3 seconds)</a>
+
+<!-- Link to close the advertising window -->
+<a href="#" id="closeAdLink">Close Advertising Window</a>
+
+<script>
+  let adWindow = null; // Variable to store the reference to the advertising window
+
+  // Function to open the advertising window after 3 seconds
+  function openAdWindow() {
+    setTimeout(() => {
+      adWindow = window.open(
+              'about:blank', // URL (can be replaced with an actual URL)
+              'AdvertisingWindow', // Window name
+              'width=600,height=400,left=100,top=100' // Window features
+      );
+
+      if (adWindow) {
+        // Write long paragraphs to the new window
+        adWindow.document.write(`
+                        <html>
+                        <head>
+                            <title>Advertising Window</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    padding: 20px;
+                                    background-color: #f9f9f9;
+                                }
+                                h1 {
+                                    color: #333;
+                                }
+                                p {
+                                    line-height: 1.6;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <h1>Welcome to the Advertising Window</h1>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </body>
+                        </html>
+                    `);
+        adWindow.document.close(); // Close the document stream
+      } else {
+        alert('The browser blocked the popup window. Please allow popups for this site.');
+      }
+    }, 3000); // Delay of 3 seconds
+  }
+
+  // Function to close the advertising window
+  function closeAdWindow() {
+    if (adWindow && !adWindow.closed) {
+      adWindow.close(); // Close the window
+      adWindow = null; // Clear the reference
+    } else {
+      alert('No advertising window is open.');
+    }
+  }
+
+  // Add event listeners to the links
+  document.getElementById('openAdLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    openAdWindow(); // Open the advertising window
+  });
+
+  document.getElementById('closeAdLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    closeAdWindow(); // Close the advertising window
+  });
+</script>
+</body>
+</html>

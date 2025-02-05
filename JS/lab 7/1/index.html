@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input:focus {
+            border: solid 1px blue;
+        }
+
+        input:invalid {
+            background-color: gray;
+        }
+
+        input:valid {
+            background-color: white;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #validationMessage {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Registration Form</h1>
+<form id="registrationForm" action="thankyou.html" method="get">
+    <!-- Full Name Field -->
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" placeholder="Enter your Name:" required>
+    <span id="fullNameError" class="error"></span>
+
+    <!-- Email Field -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <!-- City Field -->
+    <label for="city">City:</label>
+    <select id="city" name="city" required>
+        <option value="">Select a city</option>
+        <option value="New York">New York</option>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="Chicago">Chicago</option>
+        <option value="Houston">Houston</option>
+    </select>
+
+    <!-- Password Field -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <!-- Repeat Password Field -->
+    <label for="repeatPassword">Repeat Password:</label>
+    <input type="password" id="repeatPassword" name="repeatPassword" required>
+    <span id="repeatPasswordError" class="error"></span>
+
+    <!-- Terms and Conditions Checkbox -->
+    <label>
+        <input type="checkbox" id="agree" name="agree" required>
+        I accept the terms and conditions
+    </label>
+
+    <!-- Validation Message -->
+    <div id="validationMessage"></div>
+
+    <!-- Register Button -->
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    // Get form elements
+    const fullNameInput = document.getElementById('fullName');
+    const fullNameError = document.getElementById('fullNameError');
+    const repeatPasswordInput = document.getElementById('repeatPassword');
+    const repeatPasswordError = document.getElementById('repeatPasswordError');
+    const passwordInput = document.getElementById('password');
+    const validationMessage = document.getElementById('validationMessage');
+
+    // Full Name Validation
+    fullNameInput.addEventListener('blur', function () {
+        if (fullNameInput.value.trim() === '' || fullNameInput.value.length <= 3) {
+            fullNameError.textContent = 'Invalid name';
+            fullNameInput.focus();
+            fullNameInput.select();
+        } else {
+            fullNameError.textContent = '';
+        }
+    });
+
+    // Repeat Password Validation
+    repeatPasswordInput.addEventListener('blur', function () {
+        if (repeatPasswordInput.value !== passwordInput.value) {
+            repeatPasswordError.textContent = 'Password and repeat password should be the same';
+        } else {
+            repeatPasswordError.textContent = '';
+        }
+    });
+
+    // Form Submission Handling
+    document.getElementById('registrationForm').addEventListener('submit', function (event) {
+        let isValid = true;
+
+        // Validate Full Name
+        if (fullNameInput.value.trim() === '' || fullNameInput.value.length <= 3) {
+            fullNameError.textContent = 'Invalid name';
+            fullNameInput.focus();
+            fullNameInput.select();
+            isValid = false;
+        }
+
+        // Validate Password and Repeat Password
+        if (passwordInput.value !== repeatPasswordInput.value) {
+            repeatPasswordError.textContent = 'Password and repeat password should be the same';
+            isValid = false;
+        }
+
+        // If validation fails, prevent form submission and show message
+        if (!isValid) {
+            event.preventDefault();
+            validationMessage.textContent = 'Please correct the validation errors first.';
+        } else {
+            validationMessage.textContent = ''; // Clear validation message
+        }
+    });
+</script>
+</body>
+</html>

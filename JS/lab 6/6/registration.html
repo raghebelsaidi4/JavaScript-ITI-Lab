@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<h1>Registration Form</h1>
+<form>
+    <!-- First Name Field -->
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label>
+        <input type="checkbox" id="agree" name="agree" required>
+        <a href="terms.html" target="_blank">I agree to Terms and Conditions</a>
+    </label>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    // Get the first name input field
+    const firstNameInput = document.getElementById('firstName');
+
+    // Add keydown event listener to the first name input
+    firstNameInput.addEventListener('keydown', function (event) {
+        // Get the key code of the pressed key
+        const keyCode = event.keyCode || event.which;
+
+        // Allow alphabetic characters (A-Z, a-z), space, backspace, and delete
+        const isAlphabetic = (keyCode >= 65 && keyCode <= 90) || // A-Z
+            (keyCode >= 97 && keyCode <= 122) || // a-z
+            keyCode === 32 || // Space
+            keyCode === 8 || // Backspace
+            keyCode === 46; // Delete
+
+        // If the key is not alphabetic, prevent the default behavior
+        if (!isAlphabetic) {
+            event.preventDefault();
+            alert('Only alphabetic characters are allowed in the First Name field.');
+        }
+    });
+</script>
+</body>
+</html>

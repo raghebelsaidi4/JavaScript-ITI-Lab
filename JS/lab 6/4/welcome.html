@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1 id="welcomeMessage"></h1>
+
+<script>
+  // Function to get query parameters from the URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Get the username from the URL
+  const username = getQueryParam('username');
+
+  // Display the welcome message
+  if (username) {
+    document.getElementById('welcomeMessage').textContent = `Welcome, ${username}!`;
+  } else {
+    document.getElementById('welcomeMessage').textContent = 'Welcome, Guest!';
+  }
+</script>
+</body>
+</html>

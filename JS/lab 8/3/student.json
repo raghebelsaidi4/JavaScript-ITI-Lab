@@ -1,0 +1,12 @@
+{
+  "id": 101,
+  "name": "John Doe",
+  "age": 22,
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "zip": "10001"
+  },
+  "skills": ["JavaScript", "Python", "Spring Boot"],
+  "isLeader": true
+}
